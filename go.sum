@@ -1,0 +1,11 @@
+github.com/aws/aws-sdk-go v1.16.14 h1:v/Jc1ryxAa6F9uPwXl2RSuFsGC4Iai8PEiSDP/cprHc=
+github.com/aws/aws-sdk-go v1.16.14/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
+github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af h1:pmfjZENx5imkbgOkpRUYLnmbU7UEFbjtDA2hxJ1ichM=
+github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
+github.com/klauspost/cpuid v1.2.0 h1:NMpwD2G9JSFOE1/TJjGSo5zG7Yb2bTe7eq1jH+irmeE=
+github.com/klauspost/cpuid v1.2.0/go.mod h1:Pj4uuM528wm8OyEC2QMXAi2YiTZ96dNQPGgoMS4s3ek=
+github.com/mholt/certmagic v0.0.0-20190104040408-9895a52c5db6 h1:W0d8UQ3FBG4LTT2sH7kA/JezbEvORNTzUroX8rHMicY=
+github.com/mholt/certmagic v0.0.0-20190104040408-9895a52c5db6/go.mod h1:09k100NW9m2nUn/lUB5JmCG1iFw0nEZ4HT0bdhDn9ns=
+github.com/xenolf/lego v1.2.1 h1:wAsBCIaTDlgYbR/yVuP0gzcnZrA94NVc84K6vfOIyyA=
+golang.org/x/crypto v0.0.0-20190103213133-ff983b9c42bc h1:F5tKCVGp+MUAHhKp5MZtGqAlGX3+oCsiL1Q629FL90M=
+golang.org/x/crypto v0.0.0-20190103213133-ff983b9c42bc/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
