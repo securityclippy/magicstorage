@@ -165,7 +165,7 @@ func (s *S3Storage) Stat(key string) (cm.KeyInfo, error) {
 // Filename returns the key as a path on the file
 // system prefixed by S3Storage.Path.
 func (s *S3Storage) Filename(key string) string {
-	return filepath.Join(s.Path, filepath.FromSlash(key))
+	return filepath.ToSlash(filepath.Join(s.Path, filepath.FromSlash(key)))
 }
 
 // Lock obtains a lock named by the given key. It blocks
@@ -230,7 +230,7 @@ func (s *S3Storage) String() string {
 }
 
 func (s *S3Storage) lockFileName(key string) string {
-	return filepath.Join(s.lockDir(), StorageKeys.Safe(key)+".lock")
+	return filepath.ToSlash(filepath.Join(s.lockDir(), StorageKeys.Safe(key)+".lock"))
 }
 
 func (s *S3Storage) lockDir() string {
