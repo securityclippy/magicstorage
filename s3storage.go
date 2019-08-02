@@ -27,8 +27,8 @@ const staleLockDuration = 2 * time.Hour
 // to check the existence of a lock file
 const fileLockPollInterval = 1 * time.Second
 
-
 var StorageKeys cm.KeyBuilder
+
 // S3Storage implements the certmagic Storage interface using amazon's
 // s3 storage.  An effort has been made to make the S3Storage implementation
 // as similar as possible to the original filestorage type in order to
