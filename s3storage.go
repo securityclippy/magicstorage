@@ -39,8 +39,8 @@ var StorageKeys cm.KeyBuilder
 
 type S3Storage struct {
 	Path   string
-	bucket *string
-	svc    s3iface.S3API
+	Bucket *string
+	SVC    s3iface.S3API
 }
 
 func NewS3Storage(bucketName, aws_region string) *S3Storage {
@@ -53,8 +53,8 @@ func NewS3Storage(bucketName, aws_region string) *S3Storage {
 	svc := s3.New(sess)
 
 	store := &S3Storage{
-		bucket: aws.String(bucketName),
-		svc:    svc,
+		Bucket: aws.String(bucketName),
+		SVC:    svc,
 		Path:   "certmagic",
 	}
 
@@ -63,8 +63,8 @@ func NewS3Storage(bucketName, aws_region string) *S3Storage {
 
 // Exists returns true if key exists in s3
 func (s *S3Storage) Exists(key string) bool {
-	_, err := s.svc.GetObject(&s3.GetObjectInput{
-		Bucket: s.bucket,
+	_, err := s.SVC.GetObject(&s3.GetObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(key),
 	})
 	if err == nil {
@@ -77,8 +77,8 @@ func (s *S3Storage) Exists(key string) bool {
 // Store saves value at key.
 func (s *S3Storage) Store(key string, value []byte) error {
 	filename := s.Filename(key)
-	_, err := s.svc.PutObject(&s3.PutObjectInput{
-		Bucket: s.bucket,
+	_, err := s.SVC.PutObject(&s3.PutObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(filename),
 		Body:   bytes.NewReader(value),
 	})
@@ -91,8 +91,8 @@ func (s *S3Storage) Store(key string, value []byte) error {
 
 // Load retrieves the value at key.
 func (s *S3Storage) Load(key string) ([]byte, error) {
-	result, err := s.svc.GetObject(&s3.GetObjectInput{
-		Bucket: s.bucket,
+	result, err := s.SVC.GetObject(&s3.GetObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(s.Filename(key)),
 	})
 	if err != nil {
@@ -108,8 +108,8 @@ func (s *S3Storage) Load(key string) ([]byte, error) {
 
 // Delete deletes the value at key.
 func (s *S3Storage) Delete(key string) error {
-	_, err := s.svc.DeleteObject(&s3.DeleteObjectInput{
-		Bucket: s.bucket,
+	_, err := s.SVC.DeleteObject(&s3.DeleteObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(s.Filename(key)),
 	})
 	if err != nil {
@@ -126,8 +126,8 @@ func (s *S3Storage) List(prefix string, recursive bool) ([]string, error) {
 	var keys []string
 
 	prefixPath := s.Filename(prefix)
-	result, err := s.svc.ListObjects(&s3.ListObjectsInput{
-		Bucket: s.bucket,
+	result, err := s.SVC.ListObjects(&s3.ListObjectsInput{
+		Bucket: s.Bucket,
 		Prefix: aws.String(prefixPath),
 	})
 	if err != nil {
@@ -145,8 +145,8 @@ func (s *S3Storage) List(prefix string, recursive bool) ([]string, error) {
 // Stat returns information about key.
 func (s *S3Storage) Stat(key string) (cm.KeyInfo, error) {
 
-	result, err := s.svc.GetObject(&s3.GetObjectInput{
-		Bucket: s.bucket,
+	result, err := s.SVC.GetObject(&s3.GetObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(key),
 	})
 
@@ -247,8 +247,8 @@ func (s *S3Storage) createLockFile(filename string) error {
 	if exists {
 		return fmt.Errorf(lockFileExists)
 	}
-	_, err := s.svc.PutObject(&s3.PutObjectInput{
-		Bucket: s.bucket,
+	_, err := s.SVC.PutObject(&s3.PutObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(filename),
 		Body:   bytes.NewReader([]byte("lock")),
 	})
@@ -260,8 +260,8 @@ func (s *S3Storage) createLockFile(filename string) error {
 }
 
 func (s *S3Storage) deleteLockFile(keyPath string) error {
-	_, err := s.svc.DeleteObject(&s3.DeleteObjectInput{
-		Bucket: s.bucket,
+	_, err := s.SVC.DeleteObject(&s3.DeleteObjectInput{
+		Bucket: s.Bucket,
 		Key:    aws.String(keyPath),
 	})
 	if err != nil {
