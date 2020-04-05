@@ -65,7 +65,7 @@ func NewS3Storage(bucketName, aws_region string) *S3Storage {
 func (s *S3Storage) Exists(key string) bool {
 	_, err := s.svc.GetObject(&s3.GetObjectInput{
 		Bucket: s.bucket,
-		Key:    aws.String(key),
+		Key:    aws.String(s.Filename(key)),
 	})
 	if err == nil {
 		return true
